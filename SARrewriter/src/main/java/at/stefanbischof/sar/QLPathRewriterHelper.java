@@ -23,7 +23,7 @@ import com.hp.hpl.jena.sparql.path.PathParser;
  */
 public class QLPathRewriterHelper {
   
-  static Node newVariable(VariableGenerator vargen) {
+  protected static Node newVariable(VariableGenerator vargen) {
     return NodeFactory.createVariable(vargen.getNewVariable());
   }
 
@@ -32,7 +32,7 @@ public class QLPathRewriterHelper {
    * 
    * @param operator
    */
-  static void addToOpList(Op operator, OpSequence opSeq) {
+  protected static void addToOpList(Op operator, OpSequence opSeq) {
     opSeq.add(operator);
   }
 
@@ -43,7 +43,7 @@ public class QLPathRewriterHelper {
    * @param triple
    * @param opSeq
    */
-  static void addToOpList(Triple triple, OpSequence opSeq) {
+  protected static void addToOpList(Triple triple, OpSequence opSeq) {
   
     Op lastOp = opSeq.size() > 0 ? opSeq.get(opSeq.size() - 1) : null;
   
@@ -62,7 +62,7 @@ public class QLPathRewriterHelper {
    * @param tr
    * @return
    */
-  static OpBGP tripleToBGP(Triple tr) {
+  protected static OpBGP tripleToBGP(Triple tr) {
     BasicPattern bp = new BasicPattern();
     bp.add(tr);
     return new OpBGP(bp);
@@ -74,18 +74,18 @@ public class QLPathRewriterHelper {
    * @param object
    * @return
    */
-  static OpPath pathToOpPath(Node subject, String path, Node object) {
+  protected static OpPath pathToOpPath(Node subject, String path, Node object) {
     return subject == null || path == null || object == null ? null : new OpPath(new TriplePath(subject, PathParser.parse(path, QLPathRewriter.prefixMapping), object));
   }
 
-  static Op bgp(Node subject, Node predicate, Node object) {
+  protected static Op bgp(Node subject, Node predicate, Node object) {
     BasicPattern bp = new BasicPattern();
     bp.add(new Triple(subject, predicate, object));
     
     return new OpBGP(bp);
   }
 
-  static Op union(Op ... ops) {
+  protected static Op union(Op ... ops) {
     Op r = null;
     
     for(Op op : ops) {
@@ -107,7 +107,7 @@ public class QLPathRewriterHelper {
    * @param ops
    * @return
    */
-  static Op join(Op ... ops) {
+  protected static Op join(Op ... ops) {
     Op r = null;
     
     for(Op op : ops) {
@@ -126,7 +126,7 @@ public class QLPathRewriterHelper {
     return NodeFactory.createURI(PrefixMapping.Standard.expandPrefix(curie));
   }
 
-  static Op bgp(Node subject, String predicate, Node object) {
+  protected static Op bgp(Node subject, String predicate, Node object) {
     return bgp(subject, curie2Node(predicate), object);
   }
 

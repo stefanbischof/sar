@@ -103,8 +103,6 @@ public class OntologyAnalyzer {
       r.setPropDisj(null);
     }
     
-    
-    
     return r;
   }
   

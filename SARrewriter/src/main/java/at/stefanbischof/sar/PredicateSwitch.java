@@ -1,4 +1,4 @@
-/**
+	/**
  * 
  */
 package at.stefanbischof.sar;
@@ -286,6 +286,7 @@ public class PredicateSwitch {
     case "list":
       this.first = null;
       this.rest = null;
+      break;
     default:
       LOGGER.warning("Invalid ignore: " + ignore);
     }

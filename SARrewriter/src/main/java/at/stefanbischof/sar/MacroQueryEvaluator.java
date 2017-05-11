@@ -56,7 +56,7 @@ public class MacroQueryEvaluator {
    * @param qlPathRewriter
    * @return
    */
-  Query transform(Query query, QLPathRewriter qlPathRewriter) {
+  protected Query transform(Query query, QLPathRewriter qlPathRewriter) {
     Op newop = Transformer.transform(qlPathRewriter, Algebra.compile(query));
     
     final Query newq = OpAsQuery.asQuery(newop); // Convert to a query

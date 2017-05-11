@@ -24,7 +24,7 @@ public class MacroQueryEvaluatorBenchmark extends MacroQueryEvaluator {
   }
   
   @Override
-  Query transform(Query query, QLPathRewriter qlPathRewriter) {
+  protected Query transform(Query query, QLPathRewriter qlPathRewriter) {
     sw.start();
     Query q = super.transform(query, qlPathRewriter);
     sw.stop();

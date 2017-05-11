@@ -55,14 +55,14 @@ public class CLI {
    * @return
    * @throws IllegalArgumentException
    */
-  static Option getHelp() throws IllegalArgumentException {
+  protected static Option getHelp() throws IllegalArgumentException {
     return new Option("h", "print help");
   }
 
   /**
    * @return
    */
-  static Option getTBOX() {
+  protected static Option getTBOX() {
     return Option.builder("tbox").hasArg().argName("tboxgraph")
         .desc( "graph name of the TBox")
         .build();
@@ -71,7 +71,7 @@ public class CLI {
   /**
    * @return
    */
-  static Option getOI() {
+  protected static Option getOI() {
     return Option.builder("oi").hasArg().argName("properties")
         .desc("comma separated properties to ignore: dom,rng,sp,sc,onp,inv,ec,ep,first,rest,int")
         .build();
@@ -80,7 +80,7 @@ public class CLI {
   /**
    * @return
    */
-  static Option getOIF() {
+  protected static Option getOIF() {
     return Option.builder("oif").hasArg().argName( "filename" )
         .desc( "ontology file to analyze for properties to ignore")
         .build();

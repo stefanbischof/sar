@@ -103,33 +103,33 @@ public class QLPathMacros {
   }
   
   
-  String inverse() {
+  private String inverse() {
     final String ret = disj(ps.getInv(), invPath(ps.getInv()));
     return ret;
   }
   
-  String spoeqp() {
+  private String spoeqp() {
     return disj(ps.getSp(), ps.getEqp(), invPath(ps.getEqp()));
   }
 
   /**
    * @return
    */
-  String intListMember() {
+  private String intListMember() {
     // this function is only used from within a star, so no more star materialization needed
     return seq(ps.getInt(), star(ps.getRest()), ps.getFirst());
   }
   
-  String someprop() {
+  private String someprop() {
     return seq(ps.getOnp(), subPropertyOf(), disj(invPath(ps.getOnp()), ps.getDom()));
   }
   
-  String somepropinv() {
+  private String somepropinv() {
     // this function is only used from within a star, so no more star materialization needed
     return seq(ps.getOnp(), subPropertyOf(), inverse(), star(spoeqp()), ps.getRng());
   }
 
-  String disjointClassses() {
+  private String disjointClassses() {
     return disj(ps.getDisj(),invPath(ps.getDisj()),ps.getComp(),invPath(ps.getComp()));
   }
 
@@ -219,7 +219,7 @@ public class QLPathMacros {
     return r;
   }
 
-  Op twoMembers(Node x, Node y, Node z) {
+  private Op twoMembers(Node x, Node y, Node z) {
     Node varW = newVariable(vargen);
     
     return join(

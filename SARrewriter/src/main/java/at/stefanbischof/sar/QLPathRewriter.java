@@ -21,7 +21,7 @@ public class QLPathRewriter extends TransformCopy {
   public static final String CACHE_PREFIX = "http://stefanbischof.at/sar-cache#";
   private static final String PREFIX_BLANKVAR = "_b";
 
-  final VariableGenerator vargen = new VariableGenerator("_v");
+  protected final VariableGenerator vargen = new VariableGenerator("_v");
   
   
   /**

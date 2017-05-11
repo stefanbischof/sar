@@ -28,7 +28,7 @@ class PathBuilder {
    * @param terms
    * @return
    */
-  static String seq(String... terms) {
+  protected static String seq(String... terms) {
     List<String> filtered = new LinkedList<>();
     
     for(String term : terms) {
@@ -55,7 +55,7 @@ class PathBuilder {
    * @param terms
    * @return
    */
-  static String disj(String... terms) {
+  protected static String disj(String... terms) {
     List<String> filtered = new LinkedList<>();
     boolean optional = false;
     
@@ -80,7 +80,7 @@ class PathBuilder {
     }
   }
 
-  static String star(String term) {
+  protected static String star(String term) {
     if(term == null) {
       return "*";
     } else {
@@ -88,7 +88,7 @@ class PathBuilder {
     }
   }
 
-  static String opt(String term) {
+  protected static String opt(String term) {
     if(term == null) {
       return "*"; // TODO is this correct?
     } else {
@@ -96,7 +96,7 @@ class PathBuilder {
     }
   }
 
-  static String invPath(String term) {
+  protected static String invPath(String term) {
     if(term == null) {
       return null;
     } else {
