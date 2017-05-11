@@ -218,7 +218,7 @@ public class QLPathRewriter extends TransformCopy {
     
     String sc = getMacro().subClassOf();
     
-    if(sc.equals("*")) { // (nearly) empty tbox: replace the variable with the class uri (which is the object)
+    if("*".equals(sc)) { // (nearly) empty tbox: replace the variable with the class uri (which is the object)
       sc = null;
       skVar1 = triple.getObject();
     }
@@ -291,7 +291,7 @@ public class QLPathRewriter extends TransformCopy {
     Node skVar2 = newVariable(vargen);
     
     String sp = getMacro().subPropertyOf();
-    if(sp.equals("*")) {  // (nearly) empty tbox: return triple unchanged
+    if("*".equals(sp)) {  // (nearly) empty tbox: return triple unchanged
       sp = null;
       skVar1 = triple.getPredicate();
     }

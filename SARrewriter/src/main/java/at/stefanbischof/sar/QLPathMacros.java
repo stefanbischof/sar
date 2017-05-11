@@ -35,7 +35,7 @@ public class QLPathMacros {
    * 
    * This is incompatible/orthogonal with matSC, matSP, matINV
    */
-  static boolean matStar = false;
+  protected static boolean matStar = false;
   public static final String C_STAR_SC = "cache:starSC?";
   public static final String C_STAR_SP = "cache:starSP?";
   public static final String C_STAR_SPI = "cache:starSPI?";

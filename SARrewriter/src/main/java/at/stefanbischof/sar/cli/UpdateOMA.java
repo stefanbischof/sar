@@ -98,14 +98,14 @@ public class UpdateOMA {
     UpdateFactory.create(r);
   }
 
-  static String embedCacheQuery(String head, String body) {
+  protected static String embedCacheQuery(String head, String body) {
     final String subjectVar = "?S ";
     final String objectvar = " ?O";
     
     return cacheQuery(subjectVar + head + objectvar, subjectVar + body + objectvar);
   }
   
-  static String cacheUpdateQuery(String head, Op op) {
+  protected static String cacheUpdateQuery(String head, Op op) {
 	Query q = OpAsQuery.asQuery(op);
 	q.setPrefixMapping(PrefixMapping.Standard);
 	

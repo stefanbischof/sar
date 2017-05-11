@@ -24,6 +24,8 @@ public class Benchmark {
   
   private static String ontologyFilename = "resources/test/lubm/univ-bench.owl";
   private static PredicateSwitch oips;
+  private String filename;
+  private BenchmarkStopWatches bench;
   
   public static void main (String[] args) throws IOException {
     if(args.length < 2) {
@@ -61,9 +63,6 @@ public class Benchmark {
     
     System.out.println(b.bench.csv());
   }
-
-  private String filename;
-  private BenchmarkStopWatches bench;
 
   /**
    * @param filename
