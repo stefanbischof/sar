@@ -2,8 +2,8 @@
 language: java
   # jdk tag
 jdk:
- - oraclejdk7
- build:
+  - oraclejdk7
+build:
   ci:
-   - cd SARrewriter && mvn install -DskipTests=true
-   - cd SARwebapp && mvn install -DskipTests=true
+    - cd SARrewriter && mvn install -DskipTests=true
+    - cd SARwebapp && mvn install -DskipTests=true
