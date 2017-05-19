@@ -6,4 +6,4 @@ jdk:
 build:
   ci:
     - cd SARrewriter && mvn install -DskipTests=true
-    - cd SARwebapp && mvn install -DskipTests=true
+    - cd ../SARwebapp && mvn install -DskipTests=true
