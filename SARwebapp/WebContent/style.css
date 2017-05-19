@@ -1,0 +1,39 @@
+
+.CodeMirror-scroll, #rewrite {
+  /* Set scrolling behaviour here */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+.CodeMirror, #rewrite {
+  font-family: monospace;
+  height: 40rem;
+  border: 1px solid #666;
+  width: 100%;
+  line-height: 1.3em;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.7rem;
+}
+
+#rewrite {
+    background-color: #ffe;
+}
+
+
+#oi-fs {
+    transition: opacity .2s linear;
+    opacity: 0.4; 
+    
+    
+}
+
+input#oi:checked ~ #oi-fs {
+    opacity: 1;
+    
+}
+
+body {
+    padding-bottom: 4rem;
+    font-family: Tahoma, sans-serif;
+}
