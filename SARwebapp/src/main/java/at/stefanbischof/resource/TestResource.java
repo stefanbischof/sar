@@ -11,7 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import at.stefanbischof.sar.MacroQueryEvaluator;
-import at.stefanbischof.sar.PredicateSwitch;
+import at.stefanbischof.sar.PropertySwitch;
 
 /**
  * @author z003354t
@@ -24,7 +24,7 @@ public class TestResource {
   private boolean mat = false;
   private boolean starmat = false;
   private String tbox;
-  private PredicateSwitch ps = new PredicateSwitch();
+  private PropertySwitch ps = new PropertySwitch();
   private MacroQueryEvaluator eval = new MacroQueryEvaluator(ps);
   
   @POST
@@ -34,7 +34,7 @@ public class TestResource {
     LOGGER.info("QUERY: <" + query.substring(10) + "...>");
     LOGGER.info("MESSAGE: <" + message + ">");
     
-    ps = new PredicateSwitch();
+    ps = new PropertySwitch();
     eval = new MacroQueryEvaluator(ps);
     
     if(message != null & !message.isEmpty()) {

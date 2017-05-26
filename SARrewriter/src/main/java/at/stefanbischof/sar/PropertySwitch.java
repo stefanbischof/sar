@@ -6,11 +6,11 @@ package at.stefanbischof.sar;
 import java.util.logging.Logger;
 
 /**
- * @author z003354t
+ * This class holds the base case and switches off properties for the OI optimization
  *
  */
-public class PredicateSwitch {
-  private static final Logger LOGGER = Logger.getLogger(PredicateSwitch.class.getName());
+public class PropertySwitch {
+  private static final Logger LOGGER = Logger.getLogger(PropertySwitch.class.getName());
 
   private String dom = "rdfs:domain";
   private String rng = "rdfs:range";
@@ -234,20 +234,21 @@ public class PredicateSwitch {
   public void setPropDisj(String propDisj) {
     this.propDisj = propDisj;
   }
-  public void reset() {
-//    PredicateSwitch.DOM = "rdfs:domain";
-//    PredicateSwitch.RNG = "rdfs:range";
-//    PredicateSwitch.SP = "rdfs:subPropertyOf";
-//    PredicateSwitch.SC = "rdfs:subClassOf";
-//    PredicateSwitch.TYPE = "rdf:type";
-//    PredicateSwitch.ONP = "owl:onProperty";
-//    PredicateSwitch.INV = "owl:inverseOf";
-//    PredicateSwitch.EC = "owl:equivalentClass";
-//    PredicateSwitch.EP = "owl:equivalentProperty";
-//    PredicateSwitch.FIRST = "rdf:first";
-//    PredicateSwitch.REST = "rdf:rest";
-//    PredicateSwitch.INT = "owl:intersectionOf";
-  }
+//  public void reset() {
+//    PropertySwitch.DOM = "rdfs:domain";
+//    PropertySwitch.RNG = "rdfs:range";
+//    PropertySwitch.SP = "rdfs:subPropertyOf";
+//    PropertySwitch.SC = "rdfs:subClassOf";
+//    PropertySwitch.TYPE = "rdf:type";
+//    PropertySwitch.ONP = "owl:onProperty";
+//    PropertySwitch.INV = "owl:inverseOf";
+//    PropertySwitch.EC = "owl:equivalentClass";
+//    PropertySwitch.EP = "owl:equivalentProperty";
+//    PropertySwitch.FIRST = "rdf:first";
+//    PropertySwitch.REST = "rdf:rest";
+//    PropertySwitch.INT = "owl:intersectionOf";
+//  }
+  
   public void disable(String ignore) {
     switch (ignore) {
     case "dom":
@@ -297,7 +298,7 @@ public class PredicateSwitch {
    */
   @Override
   public String toString() {
-    return "PredicateSwitch [" + (dom != null ? "dom=" + dom + ", " : "")
+    return "PropertySwitch [" + (dom != null ? "dom=" + dom + ", " : "")
         + (rng != null ? "rng=" + rng + ", " : "")
         + (sp != null ? "sp=" + sp + ", " : "")
         + (sc != null ? "sc=" + sc + ", " : "")

@@ -12,7 +12,6 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.util.FileManager;
 
 /**
- * @author z003354t
  *
  */
 public class OntologyAnalyzer {
@@ -50,9 +49,9 @@ public class OntologyAnalyzer {
   /**
    * @return
    */
-  public PredicateSwitch analyze() {
-    PredicateSwitch ps = new PredicateSwitch();
-    PredicateSwitch r = new PredicateSwitch();
+  public PropertySwitch analyze() {
+    PropertySwitch ps = new PropertySwitch();
+    PropertySwitch r = new PropertySwitch();
     
     if (!evalAskQuery(askQuery(ps.getDom()))) {
       r.setDom(null);

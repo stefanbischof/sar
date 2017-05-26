@@ -10,13 +10,11 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import com.hp.hpl.jena.graph.NodeFactory;
-import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.update.UpdateFactory;
 
 import at.stefanbischof.sar.OntologyAnalyzer;
-import at.stefanbischof.sar.PredicateSwitch;
-import at.stefanbischof.sar.QLPathMacros;
-import at.stefanbischof.sar.QLPathMacrosOMA;
+import at.stefanbischof.sar.PropertySwitch;
+import at.stefanbischof.sar.QLPathMacrosOMSF;
 import at.stefanbischof.sar.QLPathRewriter;
 import at.stefanbischof.sar.QLPathRewriterFactory;
 
@@ -27,7 +25,6 @@ import at.stefanbischof.sar.QLPathRewriterFactory;
  *
  */
 public class UpdateOMSF {
-  
   
   public static void main(String[] args) {
     Option oif = CLI.getOIF();
@@ -60,7 +57,7 @@ public class UpdateOMSF {
       
       OntologyAnalyzer oa = new OntologyAnalyzer();
       oa.loadModel(ontologyfilename);
-      PredicateSwitch ps  = oa.analyze();
+      PropertySwitch ps  = oa.analyze();
       f.setPs(ps);
     }
     
@@ -70,16 +67,12 @@ public class UpdateOMSF {
     
     QLPathRewriter q = f.getInstance();
     
-    String r = "PREFIX cache: <"+ QLPathRewriter.CACHE_PREFIX + ">";
-    for(String prefix: PrefixMapping.Standard.getNsPrefixMap().keySet()) {
-      r += "\nPREFIX " + prefix + ": <" +  PrefixMapping.Standard.getNsPrefixMap().get(prefix) + ">";
-    }
-    
-    r += UpdateOMA.embedCacheQuery(removeOptional(QLPathMacros.C_STAR_SC), q.getMacro().subClassOf()) + ";";
-    r += UpdateOMA.embedCacheQuery(removeOptional(QLPathMacros.C_STAR_SP), q.getMacro().subPropertyOf()) + ";";
-    r += UpdateOMA.embedCacheQuery(removeOptional(QLPathMacros.C_STAR_SPI), q.getMacro().subPropertyOfInvStar()) + ";";
-    r += UpdateOMA.cacheUpdateQuery("?C a <" +  QLPathMacrosOMA.C_UC + ">", q.getMacro().univClass(NodeFactory.createVariable("C"))) + ";";
-    r += UpdateOMA.cacheUpdateQuery("?C a <" +  QLPathMacrosOMA.C_UP + ">", q.getMacro().univProperty(NodeFactory.createVariable("C")));
+    String r = "";
+    r += UpdateOMA.embedCacheQuery(QLPathMacrosOMSF.C_SC, UpdateOMA.starToPlus(q.getMacro().subClassOf())) + ";\n\n"; // TODO fix this somehow
+    r += UpdateOMA.embedCacheQuery(QLPathMacrosOMSF.C_SP, UpdateOMA.starToPlus(q.getMacro().subPropertyOf())) + ";\n\n";
+    r += UpdateOMA.embedCacheQuery(QLPathMacrosOMSF.C_STAR_SPO, UpdateOMA.starToPlus(q.getMacro().subPropertyOfInvStar())) + ";";
+    r += UpdateOMA.cacheUpdateQuery("?C a <" +  QLPathMacrosOMSF.C_UC + ">", q.getMacro().univClass(NodeFactory.createVariable("C"))) + ";";
+    r += UpdateOMA.cacheUpdateQuery("?C a <" +  QLPathMacrosOMSF.C_UP + ">", q.getMacro().univProperty(NodeFactory.createVariable("C")));
 //    r += UpdateOMA.cacheUpdateQuery("?C a <" +  QLPathMacrosOMA.C_EC + ">", q.getMacro().emptyClass(NodeFactory.createVariable("C"))) + ";";
 //    r += UpdateOMA.cacheUpdateQuery("?C a <" +  QLPathMacrosOMA.C_EP + ">", q.getMacro().emptyProperty(NodeFactory.createVariable("C")));
     
@@ -96,16 +89,5 @@ public class UpdateOMSF {
     HelpFormatter formatter = new HelpFormatter();
     formatter.printHelp(UpdateOMSF.class.getSimpleName(), options, true);
     System.exit(1);
-  }
-  
-  /**
-   * replaces the last star operator with a plus operator
-   * 
-   * @param path
-   * @return
-   */
-  private static String removeOptional(String path) {
-    int i = path.lastIndexOf("?");
-    return path.substring(0, i) + path.substring(i+1);
   }
 }
