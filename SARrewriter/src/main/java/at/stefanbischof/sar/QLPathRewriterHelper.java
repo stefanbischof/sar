@@ -18,7 +18,6 @@ import com.hp.hpl.jena.sparql.core.TriplePath;
 import com.hp.hpl.jena.sparql.path.PathParser;
 
 /**
- * @author z003354t
  *
  */
 public class QLPathRewriterHelper {
@@ -117,7 +116,6 @@ public class QLPathRewriterHelper {
         r = OpJoin.create(r, op);
       }
     }
-    
     
     return r;
   }

@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import at.stefanbischof.sar.OntologyAnalyzer;
-import at.stefanbischof.sar.PredicateSwitch;
+import at.stefanbischof.sar.PropertySwitch;
 
 /**
  * REST Service to analyze an ontology for properties to ignore
@@ -30,7 +30,7 @@ public class AnalyzeResource {
     OntologyAnalyzer oa = new OntologyAnalyzer();
     LOGGER.info("Analyzing URL: " + uri);
     oa.loadModelFromUri(uri);
-    PredicateSwitch sw = oa.analyze();
+    PropertySwitch sw = oa.analyze();
     
     String ret = "{";
     // TODO use a string joiner for this

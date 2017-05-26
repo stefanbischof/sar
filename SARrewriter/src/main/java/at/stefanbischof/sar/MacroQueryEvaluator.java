@@ -12,8 +12,6 @@ import com.hp.hpl.jena.sparql.algebra.Transformer;
 
 /**
  * Main class for rewriting
- * 
- * @author z003354t
  *
  */
 public class MacroQueryEvaluator {
@@ -21,13 +19,13 @@ public class MacroQueryEvaluator {
   private boolean caching = false;
   private boolean starcaching = false;
   private String tbox;
-  private PredicateSwitch ps;
+  private PropertySwitch ps;
   
   public MacroQueryEvaluator() {
-    this(new PredicateSwitch());
+    this(new PropertySwitch());
   }
 
-  public MacroQueryEvaluator(PredicateSwitch ps) {
+  public MacroQueryEvaluator(PropertySwitch ps) {
     this.ps = ps;
   }
   

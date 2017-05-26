@@ -36,10 +36,7 @@ public class QLPathMacros {
    * This is incompatible/orthogonal with matSC, matSP, matINV
    */
   protected static boolean matStar = false;
-  public static final String C_STAR_SC = "cache:starSC?";
-  public static final String C_STAR_SP = "cache:starSP?";
-  public static final String C_STAR_SPI = "cache:starSPI?";
-  private PredicateSwitch ps;
+  private PropertySwitch ps;
   private VariableGenerator vargen;
   
   @SuppressWarnings("unused")
@@ -47,7 +44,7 @@ public class QLPathMacros {
     // hide default constructor
   }
 
-  public QLPathMacros(PredicateSwitch ps, VariableGenerator vargen) {
+  public QLPathMacros(PropertySwitch ps, VariableGenerator vargen) {
     this.ps = ps;
     this.vargen = vargen;
   }
@@ -56,7 +53,7 @@ public class QLPathMacros {
    * @return
    */
   public String subClassOf() {
-    return matStar ? C_STAR_SC :
+    return 
         star(
           disj(
               ps.getSc(), 
@@ -71,7 +68,7 @@ public class QLPathMacros {
    * @return
    */
   public String subPropertyOf() {
-    return matStar ? C_STAR_SP :
+    return 
         star(
           disj(
               spoeqp(),
@@ -82,24 +79,20 @@ public class QLPathMacros {
   }
   
   /**
-   * this is only a part of the subPropertyInv path!!!
-   * most of the rest is covered by the subPropertyOf
+   * this is only a part of the subInvPropertyOf path!!!
+   * most of the rest is covered by the subPropertyOf like this:
+   * subInvPropertyOf = subPropertyOfInv/subPropertyOf
    * 
-   * we also turn around the order of the sequence so that the already bound variable is in subject position
    * @return
    */
   public String subPropertyOfInv() {
     return seq(
-        inverse(), subPropertyOfInvStar());
+    		subPropertyOfInvStar(), inverse());
   }
   
   public String subPropertyOfInvStar() {
-    return matStar ? C_STAR_SPI : 
-      star(
-        disj(
-            invPath(ps.getSp()), 
-            ps.getEqp(), 
-            invPath(ps.getEqp())));
+    return 
+      star(spoeqp());
   }
   
   

@@ -8,7 +8,6 @@ import com.hp.hpl.jena.query.Query;
 import at.stefanbischof.sar.util.Stopwatch;
 
 /**
- * @author Stefan Bischof
  *
  */
 public class MacroQueryEvaluatorBenchmark extends MacroQueryEvaluator {
@@ -18,7 +17,7 @@ public class MacroQueryEvaluatorBenchmark extends MacroQueryEvaluator {
     this.sw = sw; 
   }
   
-  public MacroQueryEvaluatorBenchmark(PredicateSwitch ps, Stopwatch sw) {
+  public MacroQueryEvaluatorBenchmark(PropertySwitch ps, Stopwatch sw) {
     super(ps);
     this.sw = sw; 
   }

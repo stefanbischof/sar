@@ -1,6 +1,5 @@
 package at.stefanbischof.sar;
 
-import static at.stefanbischof.sar.Ontology.RDFS;
 import static at.stefanbischof.sar.PathBuilder.*;
 import static at.stefanbischof.sar.QLPathRewriterHelper.*;
 
@@ -11,23 +10,19 @@ import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.sparql.algebra.Op;
 import com.hp.hpl.jena.sparql.algebra.TransformCopy;
 import com.hp.hpl.jena.sparql.algebra.op.*;
-import com.hp.hpl.jena.vocabulary.RDF;
 
 /**
- * @author z003354t
  *
  */
 public class QLPathRewriter extends TransformCopy {
   public static final String CACHE_PREFIX = "http://stefanbischof.at/sar-cache#";
   private static final String PREFIX_BLANKVAR = "_b";
-
   protected final VariableGenerator vargen = new VariableGenerator("_v");
-  
   
   /**
    * Reorder triple patterns by pushing rdf:type patterns to the very end
    */
-  public static final boolean REORDER = true;
+  public static final boolean REORDER = false;
   
   /**
    * Prepare queries to use TBox in a separate named graph
@@ -38,23 +33,24 @@ public class QLPathRewriter extends TransformCopy {
   /**
    * prefixes used by the queries
    */
-  public static final PrefixMapping prefixMapping;
+  public static final PrefixMapping prefixMapping = PrefixMapping.Factory.create().setNsPrefixes(PrefixMapping.Standard);
+  private static final String RDFS = "http://www.w3.org/2000/01/rdf-schema#";
+  private static final String RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
   
   /**
    * Operator sequence/conjunction (AND) used for assembling the final result of the rewriting
    */
   private OpSequence opType;
 
-  private PredicateSwitch ps;
+  private PropertySwitch ps;
   private QLPathMacros macro;
   
   static {
-    prefixMapping = PrefixMapping.Factory.create().setNsPrefixes(PrefixMapping.Standard);
     prefixMapping.setNsPrefix("cache", CACHE_PREFIX);
   }
   
 
-  public QLPathRewriter(PredicateSwitch ps) {
+  public QLPathRewriter(PropertySwitch ps) {
     // TODO Auto-generated constructor stub
     this.ps = ps;
     setMacro(new QLPathMacros(ps, vargen));
@@ -136,7 +132,7 @@ public class QLPathRewriter extends TransformCopy {
       case "rdfs:subPropertyOf":
         addToOpList(rewriteSP(tr), os);
         break;
-      case at.stefanbischof.sar.Ontology.RDF + "type":
+      case RDF + "type":
       case "rdf:type":
         addToOpList(rewriteType(tr), opType);
         break;
@@ -223,8 +219,7 @@ public class QLPathRewriter extends TransformCopy {
       skVar1 = triple.getObject();
     }
     
-    Op op0 = bgp(triple.getSubject(), RDF.type.asNode(), skVar1);
-    
+    Op op0 = bgp(triple.getSubject(), com.hp.hpl.jena.vocabulary.RDF.type.asNode(), skVar1);
     
     Op path1 = pathToOpPath(skVar2, typePathDom(), skVar1);
     Op op1 = join(condGraphPattern(path1), bgp(triple.getSubject(), skVar2, NodeFactory.createAnon()));
@@ -239,14 +234,13 @@ public class QLPathRewriter extends TransformCopy {
     		getMacro().univClass(triple.getObject(), skVar1) :
     		null;
     		
-    Op union = union(op0, op1, op2, op3);
     
     Op r = path != null ?
-    	join(
+    	union(join(
             condGraphPattern(path), // still works if this is null (in the empty tbox case)
-            union
-          ):
-        union;
+            union(op0, op1, op2)
+          ), op3):
+        union(op0, op1, op2, op3);
     
     return r;
   }
