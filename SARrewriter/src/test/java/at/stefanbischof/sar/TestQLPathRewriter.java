@@ -14,14 +14,13 @@ import at.stefanbischof.sar.MacroQueryEvaluator;
 import at.stefanbischof.sar.util.FileUtil;
 
 /**
- * @author z003354t
  *
  */
 public class TestQLPathRewriter {
   public static final String SEP = ";";
   private static final String LUBMPATH = "resources/test/lubm/";
   
-  static List<String> queries = new LinkedList<String>();
+  private static List<String> queries = new LinkedList<String>();
   
   static {
       for(int i = 1; i < 15; i++) {

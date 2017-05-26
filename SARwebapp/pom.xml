@@ -1,9 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>at.siemens.ct</groupId>
-	<artifactId>spr</artifactId>
-	<version>0.0.1</version>
+	<groupId>at.stefanbischof</groupId>
+	<version>v1.0.0-alpha</version>
 	<packaging>war</packaging>
 	<name>SPARQL Path Rewriter Webapplication</name>
 	<properties>
@@ -68,9 +67,10 @@
             <version>2.15</version>
         </dependency>
 		<dependency>
-			<groupId>at.stefanbischof.sar</groupId>
-			<artifactId>SARrewriter</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>at.stefanbischof</groupId>
+			<artifactId>sar</artifactId>
+			<version>v1.0.0-alpha</version>
 		</dependency>
 	</dependencies>	
+	<artifactId>sarweb</artifactId>
 </project>
