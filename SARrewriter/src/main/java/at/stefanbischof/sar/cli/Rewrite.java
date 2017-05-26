@@ -18,19 +18,18 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import at.stefanbischof.sar.MacroQueryEvaluator;
 import at.stefanbischof.sar.OntologyAnalyzer;
-import at.stefanbischof.sar.PredicateSwitch;
+import at.stefanbischof.sar.PropertySwitch;
 import at.stefanbischof.sar.util.FileUtil;
 
 
 /**
- * @author z003354t
  * 
  */
 public class Rewrite {
   private static final Logger LOGGER = Logger.getLogger(Rewrite.class.getSimpleName());
 
 
-  private PredicateSwitch ps = new PredicateSwitch();
+  private PropertySwitch ps = new PropertySwitch();
 
   /**
    * @param args

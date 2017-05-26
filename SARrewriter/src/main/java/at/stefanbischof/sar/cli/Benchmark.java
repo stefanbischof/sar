@@ -11,19 +11,18 @@ import java.util.List;
 import at.stefanbischof.sar.MacroQueryEvaluator;
 import at.stefanbischof.sar.MacroQueryEvaluatorBenchmark;
 import at.stefanbischof.sar.OntologyAnalyzer;
-import at.stefanbischof.sar.PredicateSwitch;
+import at.stefanbischof.sar.PropertySwitch;
 import at.stefanbischof.sar.util.BenchmarkStopWatches;
 import at.stefanbischof.sar.util.FileUtil;
 import at.stefanbischof.sar.util.Stopwatch;
 
 /**
- * @author z003354t
  *
  */
 public class Benchmark {
   
   private static String ontologyFilename = "resources/test/lubm/univ-bench.owl";
-  private static PredicateSwitch oips;
+  private static PropertySwitch oips;
   private String filename;
   private BenchmarkStopWatches bench;
   

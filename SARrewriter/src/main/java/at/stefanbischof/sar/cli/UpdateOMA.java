@@ -17,7 +17,7 @@ import com.hp.hpl.jena.sparql.algebra.OpAsQuery;
 import com.hp.hpl.jena.update.UpdateFactory;
 
 import at.stefanbischof.sar.OntologyAnalyzer;
-import at.stefanbischof.sar.PredicateSwitch;
+import at.stefanbischof.sar.PropertySwitch;
 import at.stefanbischof.sar.QLPathMacrosOMA;
 import at.stefanbischof.sar.QLPathRewriter;
 import at.stefanbischof.sar.QLPathRewriterFactory;
@@ -71,7 +71,7 @@ public class UpdateOMA {
       
       OntologyAnalyzer oa = new OntologyAnalyzer();
       oa.loadModel(ontologyfilename);
-      PredicateSwitch ps  = oa.analyze();
+      PropertySwitch ps  = oa.analyze();
       f.setPs(ps);
     }
     
@@ -84,8 +84,8 @@ public class UpdateOMA {
     String r = "";
     r += embedCacheQuery(QLPathRewriterOMA.C_DOM, q.typePathDom()) + ";\n\n";
     r += embedCacheQuery(QLPathRewriterOMA.C_RNG , q.typePathRng()) + ";\n\n";
-    r += embedCacheQuery("cache:subClassOf", starToPlus(q.getMacro().subClassOf())) + ";\n\n"; // TODO fix this somehow
-    r += embedCacheQuery("cache:subPropertyOf", starToPlus(q.getMacro().subPropertyOf())) + ";\n\n";
+    r += embedCacheQuery(QLPathMacrosOMA.C_SC, starToPlus(q.getMacro().subClassOf())) + ";\n\n"; // TODO fix this somehow
+    r += embedCacheQuery(QLPathMacrosOMA.C_SP, starToPlus(q.getMacro().subPropertyOf())) + ";\n\n";
     r += embedCacheQuery(QLPathMacrosOMA.C_SPI, q.getMacro().subPropertyOfInv()) + ";\n\n";
     r += cacheUpdateQuery("?C a <" +  QLPathMacrosOMA.C_UC + ">", q.getMacro().univClass(NodeFactory.createVariable("C"))) + ";\n\n";
     r += cacheUpdateQuery("?C a <" +  QLPathMacrosOMA.C_UP + ">", q.getMacro().univProperty(NodeFactory.createVariable("C")));
@@ -135,7 +135,7 @@ public class UpdateOMA {
    * @param path
    * @return
    */
-  private static String starToPlus(String path) {
+  protected static String starToPlus(String path) {
     int i = path.lastIndexOf("*");
     return path.substring(0, i) + "+" + path.substring(i+1);
   }

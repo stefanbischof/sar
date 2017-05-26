@@ -1,7 +1,7 @@
 package at.stefanbischof.sar;
 
 public class QLPathRewriterFactory {
-  private PredicateSwitch ps = new PredicateSwitch();
+  private PropertySwitch ps = new PropertySwitch();
   private boolean oma = false;
   private boolean omsf = false;
   private String tbox = null;
@@ -9,7 +9,7 @@ public class QLPathRewriterFactory {
   /**
    * @param ps the ps to set
    */
-  public void setPs(PredicateSwitch ps) {
+  public void setPs(PropertySwitch ps) {
     this.ps = ps;
   }
 

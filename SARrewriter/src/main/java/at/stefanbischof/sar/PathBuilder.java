@@ -15,12 +15,9 @@ import org.apache.commons.lang3.StringUtils;
  * 1. a path of length > 0: this is the normal case
  * 2. null: a collapsed path of length 0, this has different consequences
  * 3. *: an empty path with a star
- * 
- * @author z003354t
  *
  */
 class PathBuilder {
-
   
   /**
    * (.../a/...)  -> ()

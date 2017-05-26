@@ -10,7 +10,6 @@ import org.apache.commons.cli.Option;
  * 
  * Inspired by https://github.com/aidhog/blabel/blob/master/src/cl/uchile/dcc/skolem/cli/Main.java
  * 
- * @author z003354t
  *
  */
 public class CLI {
