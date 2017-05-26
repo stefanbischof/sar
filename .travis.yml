@@ -1,6 +1,1 @@
 language: java
-env:
-- TEST_DIR=SARrewriter
-- TEST_DIR=SARwebapp
-before_script:
-- cd $TEST_DIR
