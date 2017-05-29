@@ -236,10 +236,10 @@ public class QLPathRewriter extends TransformCopy {
     		
     
     Op r = path != null ?
-    	union(join(
+    	join(
             condGraphPattern(path), // still works if this is null (in the empty tbox case)
-            union(op0, op1, op2)
-          ), op3):
+            union(op0, op1, op2, op3)
+          ):
         union(op0, op1, op2, op3);
     
     return r;
