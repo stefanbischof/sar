@@ -4,6 +4,9 @@ package at.stefanbischof.sar;
  */
 
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
+
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,5 +58,20 @@ public class TestQLPathRewriter {
     for(String filename : queries) {
       new MacroQueryEvaluator().rewriteQuery(FileUtil.readFile(filename));
     }
+  }
+  
+  /**
+   * Test an error of (epsilon/something) was reduced to bottom
+   */
+  @Test
+  public final void testStarOIBug() {
+	    PropertySwitch ps = new PropertySwitch();
+	    ps.disable("ep");
+	    ps.disable("sp");
+	    QLPathRewriter qlpr = new QLPathRewriter(ps);
+	    
+	    String result = qlpr.typePathDom();
+
+	    assertThat(result, containsString("domain"));
   }
 }

@@ -29,10 +29,12 @@ class PathBuilder {
     List<String> filtered = new LinkedList<>();
     
     for(String term : terms) {
-      if(term != null && !term.equals("*")) {
-        filtered.add(term);
-      //} else if(term != null && term.equals("*")) {
-        // just leave out, do nothing
+      if(term != null) {
+    	if(!"*".equals(term)) {
+          filtered.add(term);
+    	} 
+    	else { // just leave out, do nothing
+    	}
       } else { // term == null
         return null;
       }
