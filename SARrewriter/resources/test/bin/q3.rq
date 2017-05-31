@@ -1,0 +1,7 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix : <http://citydata.erd.siemens.at/ns/schema#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?C
+WHERE { ?C rdf:type :Location . ?C rdfs:label ?L . ?C :population ?P . 
+  FILTER(?P > 1000000 && STRSTARTS(?L,"W")) 
+  }
