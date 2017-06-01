@@ -63,7 +63,7 @@ public class BenchmarkStopWatches {
    * @return
    */
   public String csv() {
-    String result = "test" + SEP + "system" + SEP + "time" + SEP + "value" + "\r\n";
+    String result = "test" + SEP + "system" + SEP + "timetype" + SEP + "timevalue[us]" + "\r\n";
     
     for(String testname : testnames) {
       for(String systemname : systemnames) {
